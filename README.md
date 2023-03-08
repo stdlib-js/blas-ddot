@@ -30,10 +30,14 @@ The [dot product][dot-product] (or scalar product) is defined as
 
 <!-- <equation class="equation" label="eq:dot_product" align="center" raw="\mathbf{x}\cdot\mathbf{y} = \sum_{i=0}^{N-1} x_i y_i = x_0 y_0 + x_1 y_1 + \ldots + x_{N-1} y_{N-1}" alt="Dot product definition."> -->
 
-<div class="equation" align="center" data-raw-text="\mathbf{x}\cdot\mathbf{y} = \sum_{i=0}^{N-1} x_i y_i = x_0 y_0 + x_1 y_1 + \ldots + x_{N-1} y_{N-1}" data-equation="eq:dot_product">
+```math
+\mathbf{x}\cdot\mathbf{y} = \sum_{i=0}^{N-1} x_i y_i = x_0 y_0 + x_1 y_1 + \ldots + x_{N-1} y_{N-1}
+```
+
+<!-- <div class="equation" align="center" data-raw-text="\mathbf{x}\cdot\mathbf{y} = \sum_{i=0}^{N-1} x_i y_i = x_0 y_0 + x_1 y_1 + \ldots + x_{N-1} y_{N-1}" data-equation="eq:dot_product">
     <img src="https://cdn.jsdelivr.net/gh/stdlib-js/stdlib@d0afc603cdda35b11d5bd1633dd4dddb0d59e117/lib/node_modules/@stdlib/blas/ddot/docs/img/equation_dot_product.svg" alt="Dot product definition.">
     <br>
-</div>
+</div> -->
 
 <!-- </equation> -->
 
@@ -41,14 +45,30 @@ The [dot product][dot-product] (or scalar product) is defined as
 
 <!-- /.intro -->
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/blas-ddot
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm` branch][esm-url].
+-   If you are using Deno, visit the [`deno` branch][deno-url].
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd` branch][umd-url].
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
 ```javascript
-import ddot from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ddot@esm/index.mjs';
+var ddot = require( '@stdlib/blas-ddot' );
 ```
 
 #### ddot( x, y )
@@ -56,8 +76,8 @@ import ddot from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ddot@esm/index.mjs'
 Calculates the dot product of two double-precision floating-point vectors `x` and `y`.
 
 ```javascript
-import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@esm/index.mjs';
-import array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-array@esm/index.mjs';
+var Float64Array = require( '@stdlib/array-float64' );
+var array = require( '@stdlib/ndarray-array' );
 
 var x = array( new Float64Array( [ 4.0, 2.0, -3.0, 5.0, -1.0 ] ) );
 var y = array( new Float64Array( [ 2.0, 6.0, -1.0, -4.0, 8.0 ] ) );
@@ -74,8 +94,8 @@ The function has the following parameters:
 If provided empty vectors, the function returns `0.0`.
 
 ```javascript
-import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@esm/index.mjs';
-import array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-array@esm/index.mjs';
+var Float64Array = require( '@stdlib/array-float64' );
+var array = require( '@stdlib/ndarray-array' );
 
 var x = array( new Float64Array() );
 var y = array( new Float64Array() );
@@ -104,16 +124,11 @@ var z = ddot( x, y );
 
 <!-- eslint no-undef: "error" -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="module">
-
-import discreteUniform from 'https://cdn.jsdelivr.net/gh/stdlib-js/random-base-discrete-uniform@esm/index.mjs';
-import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@esm/index.mjs';
-import array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-array@esm/index.mjs';
-import ddot from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ddot@esm/index.mjs';
+```javascript
+var discreteUniform = require( '@stdlib/random-base-discrete-uniform' );
+var Float64Array = require( '@stdlib/array-float64' );
+var array = require( '@stdlib/ndarray-array' );
+var ddot = require( '@stdlib/blas-ddot' );
 
 var x = array( new Float64Array( 10 ) );
 var y = array( new Float64Array( 10 ) );
@@ -131,10 +146,6 @@ console.log( y.toString() );
 
 var z = ddot( x, y );
 console.log( z );
-
-</script>
-</body>
-</html>
 ```
 
 </section>
@@ -149,9 +160,9 @@ console.log( z );
 
 ## See Also
 
--   <span class="package-name">[`@stdlib/blas/base/ddot`][@stdlib/blas/base/ddot]</span><span class="delimiter">: </span><span class="description">calculate the dot product of two double-precision floating-point vectors.</span>
--   <span class="package-name">[`@stdlib/blas/gdot`][@stdlib/blas/gdot]</span><span class="delimiter">: </span><span class="description">calculate the dot product of two vectors.</span>
--   <span class="package-name">[`@stdlib/blas/sdot`][@stdlib/blas/sdot]</span><span class="delimiter">: </span><span class="description">calculate the dot product of two single-precision floating-point vectors.</span>
+-   <span class="package-name">[`@stdlib/blas-base/ddot`][@stdlib/blas/base/ddot]</span><span class="delimiter">: </span><span class="description">calculate the dot product of two double-precision floating-point vectors.</span>
+-   <span class="package-name">[`@stdlib/blas-gdot`][@stdlib/blas/gdot]</span><span class="delimiter">: </span><span class="description">calculate the dot product of two vectors.</span>
+-   <span class="package-name">[`@stdlib/blas-sdot`][@stdlib/blas/sdot]</span><span class="delimiter">: </span><span class="description">calculate the dot product of two single-precision floating-point vectors.</span>
 
 </section>
 
@@ -166,7 +177,7 @@ console.log( z );
 
 ## Notice
 
-This package is part of [stdlib][stdlib], a standard library with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
+This package is part of [stdlib][stdlib], a standard library for JavaScript and Node.js, with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
 
 For more information on the project, filing bug reports and feature requests, and guidance on how to develop [stdlib][stdlib], see the main project [repository][stdlib].
 
@@ -210,7 +221,7 @@ Copyright &copy; 2016-2023. The Stdlib [Authors][stdlib-authors].
 -->
 
 [chat-image]: https://img.shields.io/gitter/room/stdlib-js/stdlib.svg
-[chat-url]: https://gitter.im/stdlib-js/stdlib/
+[chat-url]: https://app.gitter.im/#/room/#stdlib-js_stdlib:gitter.im
 
 [stdlib]: https://github.com/stdlib-js/stdlib
 
@@ -230,15 +241,15 @@ Copyright &copy; 2016-2023. The Stdlib [Authors][stdlib-authors].
 
 [blas]: http://www.netlib.org/blas
 
-[@stdlib/ndarray/array]: https://github.com/stdlib-js/ndarray-array/tree/esm
+[@stdlib/ndarray/array]: https://github.com/stdlib-js/ndarray-array
 
 <!-- <related-links> -->
 
-[@stdlib/blas/base/ddot]: https://github.com/stdlib-js/blas-base-ddot/tree/esm
+[@stdlib/blas/base/ddot]: https://github.com/stdlib-js/blas-base-ddot
 
-[@stdlib/blas/gdot]: https://github.com/stdlib-js/blas-gdot/tree/esm
+[@stdlib/blas/gdot]: https://github.com/stdlib-js/blas-gdot
 
-[@stdlib/blas/sdot]: https://github.com/stdlib-js/blas-sdot/tree/esm
+[@stdlib/blas/sdot]: https://github.com/stdlib-js/blas-sdot
 
 <!-- </related-links> -->
 
