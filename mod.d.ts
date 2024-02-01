@@ -1,4 +1,4 @@
-/**
+/*
 * @license Apache-2.0
 *
 * Copyright (c) 2020 The Stdlib Authors.
@@ -16,17 +16,25 @@
 * limitations under the License.
 */
 
-'use strict';
+// TypeScript Version: 4.1
+
+/// <reference types="https://cdn.jsdelivr.net/gh/stdlib-js/types@main/index.d.ts"/>
+
+import { float64ndarray } from '@stdlib/types/ndarray';
 
 /**
-* BLAS level 1 routine to compute the dot product of two double-precision floating-point vectors.
+* Computes the dot product of two double-precision floating-point vectors.
 *
-* @module @stdlib/blas-ddot
+* @param x - first input array
+* @param y - second input array
+* @throws first argument must be a 1-dimensional `ndarray` containing double-precision floating-point numbers
+* @throws second argument must be a 1-dimensional `ndarray` containing double-precision floating-point numbers
+* @throws input arrays must be the same length
+* @returns dot product
 *
 * @example
 * var Float64Array = require( '@stdlib/array-float64' );
 * var array = require( '@stdlib/ndarray-array' );
-* var ddot = require( '@stdlib/blas-ddot' );
 *
 * var x = array( new Float64Array( [ 4.0, 2.0, -3.0, 5.0, -1.0 ] ) );
 * var y = array( new Float64Array( [ 2.0, 6.0, -1.0, -4.0, 8.0 ] ) );
@@ -34,12 +42,9 @@
 * var z = ddot( x, y );
 * // returns -5.0
 */
-
-// MODULES //
-
-var main = require( './main.js' );
+declare function ddot( x: float64ndarray, y: float64ndarray ): number;
 
 
 // EXPORTS //
 
-module.exports = main;
+export = ddot;
