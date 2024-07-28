@@ -63,6 +63,11 @@ The [dot product][dot-product] (or scalar product) is defined as
 ## Usage
 
 ```javascript
+import ddot from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ddot@deno/mod.js';
+```
+The previous example will load the latest bundled code from the deno branch. Alternatively, you may load a specific version by loading the file from one of the [tagged bundles](https://github.com/stdlib-js/blas-ddot/tags). For example,
+
+```javascript
 import ddot from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ddot@v0.2.2-deno/mod.js';
 ```
 
@@ -123,7 +128,7 @@ var z = ddot( x, y );
 import discreteUniform from 'https://cdn.jsdelivr.net/gh/stdlib-js/random-base-discrete-uniform@deno/mod.js';
 import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@deno/mod.js';
 import array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-array@deno/mod.js';
-import ddot from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ddot@v0.2.2-deno/mod.js';
+import ddot from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ddot@deno/mod.js';
 
 var x = array( new Float64Array( 10 ) );
 var y = array( new Float64Array( 10 ) );
