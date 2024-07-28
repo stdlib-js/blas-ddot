@@ -63,7 +63,7 @@ The [dot product][dot-product] (or scalar product) is defined as
 ## Usage
 
 ```javascript
-import ddot from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ddot@esm/index.mjs';
+import ddot from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ddot@v0.2.2-esm/index.mjs';
 ```
 
 #### ddot( x, y )
@@ -128,7 +128,7 @@ var z = ddot( x, y );
 import discreteUniform from 'https://cdn.jsdelivr.net/gh/stdlib-js/random-base-discrete-uniform@esm/index.mjs';
 import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@esm/index.mjs';
 import array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-array@esm/index.mjs';
-import ddot from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ddot@esm/index.mjs';
+import ddot from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ddot@v0.2.2-esm/index.mjs';
 
 var x = array( new Float64Array( 10 ) );
 var y = array( new Float64Array( 10 ) );
