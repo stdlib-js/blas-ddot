@@ -56,47 +56,78 @@ The [dot product][dot-product] (or scalar product) is defined as
 
 <!-- /.intro -->
 
+<section class="installation">
 
+## Installation
+
+```bash
+npm install @stdlib/blas-ddot
+```
+
+Alternatively,
+
+-   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
+-   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
+-   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
+
+The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
+
+To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
+
+</section>
 
 <section class="usage">
 
 ## Usage
 
 ```javascript
-import ddot from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ddot@esm/index.mjs';
+var ddot = require( '@stdlib/blas-ddot' );
 ```
 
-#### ddot( x, y )
+#### ddot( x, y\[, dim] )
 
 Calculates the dot product of two double-precision floating-point vectors `x` and `y`.
 
 ```javascript
-import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@esm/index.mjs';
-import array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-array@esm/index.mjs';
+var Float64Array = require( '@stdlib/array-float64' );
+var array = require( '@stdlib/ndarray-array' );
 
 var x = array( new Float64Array( [ 4.0, 2.0, -3.0, 5.0, -1.0 ] ) );
 var y = array( new Float64Array( [ 2.0, 6.0, -1.0, -4.0, 8.0 ] ) );
 
 var z = ddot( x, y );
+// returns <ndarray>
+
+var v = z.get();
 // returns -5.0
 ```
 
 The function has the following parameters:
 
--   **x**: a 1-dimensional [`ndarray`][@stdlib/ndarray/array] whose underlying data type is `float64`.
--   **y**: a 1-dimensional [`ndarray`][@stdlib/ndarray/array] whose underlying data type is `float64`.
+-   **x**: a non-zero-dimensional [`ndarray`][@stdlib/ndarray/ctor] whose underlying data type is `float64`. Must be [broadcast-compatible][@stdlib/ndarray/base/broadcast-shapes] with `y`.
+-   **y**: a non-zero-dimensional [`ndarray`][@stdlib/ndarray/ctor] whose underlying data type is `float64`. Must be [broadcast-compatible][@stdlib/ndarray/base/broadcast-shapes] with `x`.
+-   **dim**: dimension for which to compute the dot product. Must be a negative integer. Negative indices are resolved relative to the last array dimension, with the last dimension corresponding to `-1`. Default: `-1`.
 
-If provided empty vectors, the function returns `0.0`.
+If provided at least one input [`ndarray`][@stdlib/ndarray/ctor] having more than one dimension, the input [`ndarrays`][@stdlib/ndarray/ctor] are [broadcasted][@stdlib/ndarray/base/broadcast-shapes] to a common shape. For multi-dimensional input [`ndarrays`][@stdlib/ndarray/ctor], the function performs batched computation, such that the function computes the dot product for each pair of vectors in `x` and `y` according to the specified dimension index.
 
 ```javascript
-import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@esm/index.mjs';
-import array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-array@esm/index.mjs';
+var Float64Array = require( '@stdlib/array-float64' );
+var array = require( '@stdlib/ndarray-array' );
 
-var x = array( new Float64Array() );
-var y = array( new Float64Array() );
+var opts = {
+    'shape': [ 2, 3 ]
+};
+var x = array( new Float64Array( [ 4.0, 2.0, -3.0, 5.0, -1.0, 3.0 ] ), opts );
+var y = array( new Float64Array( [ 2.0, 6.0, -1.0, -4.0, 8.0, 2.0 ] ), opts );
 
 var z = ddot( x, y );
-// returns 0.0
+// returns <ndarray>
+
+var v1 = z.get( 0 );
+// returns 23.0
+
+var v2 = z.get( 1 );
+// returns -22.0
 ```
 
 </section>
@@ -107,6 +138,11 @@ var z = ddot( x, y );
 
 ## Notes
 
+-   The size of the contracted dimension must be the same for both input [`ndarrays`][@stdlib/ndarray/ctor].
+-   The function resolves the dimension index for which to compute the dot product **before** broadcasting.
+-   Negative indices are resolved relative to the last [`ndarray`][@stdlib/ndarray/ctor] dimension, with the last dimension corresponding to `-1`.
+-   The output [`ndarray`][@stdlib/ndarray/ctor] has the same data type as the input [`ndarrays`][@stdlib/ndarray/ctor] and has a shape which is determined by broadcasting and excludes the contracted dimension.
+-   If provided empty vectors, the dot product is `0`.
 -   `ddot()` provides a higher-level interface to the [BLAS][blas] level 1 function [`ddot`][@stdlib/blas/base/ddot].
 
 </section>
@@ -119,37 +155,28 @@ var z = ddot( x, y );
 
 <!-- eslint no-undef: "error" -->
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<body>
-<script type="module">
+```javascript
+var discreteUniform = require( '@stdlib/random-array-discrete-uniform' );
+var ndarray2array = require( '@stdlib/ndarray-to-array' );
+var array = require( '@stdlib/ndarray-array' );
+var ddot = require( '@stdlib/blas-ddot' );
 
-import discreteUniform from 'https://cdn.jsdelivr.net/gh/stdlib-js/random-base-discrete-uniform@esm/index.mjs';
-import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@esm/index.mjs';
-import array from 'https://cdn.jsdelivr.net/gh/stdlib-js/ndarray-array@esm/index.mjs';
-import ddot from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ddot@esm/index.mjs';
+var opts = {
+    'dtype': 'float64'
+};
 
-var x = array( new Float64Array( 10 ) );
-var y = array( new Float64Array( 10 ) );
+var x = array( discreteUniform( 10, 0, 100, opts ), {
+    'shape': [ 5, 2 ]
+});
+console.log( ndarray2array( x ) );
 
-var rand1 = discreteUniform.factory( 0, 100 );
-var rand2 = discreteUniform.factory( 0, 10 );
+var y = array( discreteUniform( 10, 0, 10, opts ), {
+    'shape': x.shape
+});
+console.log( ndarray2array( y ) );
 
-var i;
-for ( i = 0; i < x.length; i++ ) {
-    x.set( i, rand1() );
-    y.set( i, rand2() );
-}
-console.log( x.toString() );
-console.log( y.toString() );
-
-var z = ddot( x, y );
-console.log( z );
-
-</script>
-</body>
-</html>
+var z = ddot( x, y, -1 );
+console.log( ndarray2array( z ) );
 ```
 
 </section>
@@ -181,7 +208,7 @@ console.log( z );
 
 ## Notice
 
-This package is part of [stdlib][stdlib], a standard library with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
+This package is part of [stdlib][stdlib], a standard library for JavaScript and Node.js, with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
 
 For more information on the project, filing bug reports and feature requests, and guidance on how to develop [stdlib][stdlib], see the main project [repository][stdlib].
 
@@ -248,15 +275,17 @@ Copyright &copy; 2016-2024. The Stdlib [Authors][stdlib-authors].
 
 [blas]: http://www.netlib.org/blas
 
-[@stdlib/ndarray/array]: https://github.com/stdlib-js/ndarray-array/tree/esm
+[@stdlib/ndarray/ctor]: https://github.com/stdlib-js/ndarray-ctor
+
+[@stdlib/ndarray/base/broadcast-shapes]: https://github.com/stdlib-js/ndarray-base-broadcast-shapes
 
 <!-- <related-links> -->
 
-[@stdlib/blas/base/ddot]: https://github.com/stdlib-js/blas-base-ddot/tree/esm
+[@stdlib/blas/base/ddot]: https://github.com/stdlib-js/blas-base-ddot
 
-[@stdlib/blas/gdot]: https://github.com/stdlib-js/blas-gdot/tree/esm
+[@stdlib/blas/gdot]: https://github.com/stdlib-js/blas-gdot
 
-[@stdlib/blas/sdot]: https://github.com/stdlib-js/blas-sdot/tree/esm
+[@stdlib/blas/sdot]: https://github.com/stdlib-js/blas-sdot
 
 <!-- </related-links> -->
 
