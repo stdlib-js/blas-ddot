@@ -279,9 +279,9 @@ Copyright &copy; 2016-2024. The Stdlib [Authors][stdlib-authors].
 
 [@stdlib/ndarray/base/broadcast-shapes]: https://github.com/stdlib-js/ndarray-base-broadcast-shapes
 
-<!-- <related-links> -->
-
 [@stdlib/blas/base/ddot]: https://github.com/stdlib-js/blas-base-ddot
+
+<!-- <related-links> -->
 
 [@stdlib/blas/gdot]: https://github.com/stdlib-js/blas-gdot
 
